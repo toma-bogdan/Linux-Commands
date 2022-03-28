@@ -1,0 +1,59 @@
+//TOMA Bogdan Nicolae
+//323 CB
+
+/*
+		Main:
+	In main cream directorul home, care reprezinta un "root" in acest program, apoi citim linie de la 
+stdin, iar in functie de comanda apelam functiile corespunzatoare.
+	
+		Touch:
+	Verificam daca lista fisierelor parintelui este nula, in acest caz cream fisierul cu numele dorit
+si initializam inceputul listei cu acesta, in caz contrar, parcurgem toata lista si verificam daca numele
+fisierului exista deja. Daca nu exista un fisier cu numele dat, pastram intr-un pointer "last" ultimul nod din
+lista, cream fisierul, apoi il inseram dupa "last" si ii setam parintele cu parametrul dat functiei.
+
+		Mkdir:
+	Folosim aceeasi procedura ca la functia touch, doar ca pentru un director.
+
+		LS:
+	Parcurgem lista de directoare si printam numele fiecaruia pe cate o linie, apoi repetam procedura
+pentru lista de fisiere.
+
+		RM:
+	Parcurgem lista cu doi pointeri( cel curent si cel anterior celui curent) si comparam numele dat cu
+fiecare fisier din lista. In cazul in care se gaseste numele cautat, verificam daca stergem de la
+inceputul listei sau din alta parte pentru a putea elimina corect nodul din lista, dupa care eliberam
+memoria ocupata de acel nod.
+
+		Rmdir:
+	Aplicam aceeasi procedura ca la functia rm pana gasim directorul cautat, apoi apelam functia
+"delete_director" cu pointerul care pointeaza catre lista de directoare. Functia recursiva delete_director
+parcurge ierarhia de directoare pana ajunge la ultimul nivel si elimina directorul din lista. Trecand la
+urmatorul, verifica daca acesta are copii, in caz afirmativ parcurge din nou recursiv, iar in caz contrar,
+sterge lista de fisiere pe care o are directorul si trece la urmatorul element din lista. Atunci cand lista
+s-a terminat se scade un nivel si se repeta procedura pana se ajunge sa se stearga toata lista data ca
+parametru functiei.
+
+		
+		CD:
+	Verifica daca string-ul dat ca parametru este "..", in acest caz functia schimba directorul curent
+cu parintele acestuia. In caz contrar, se parcurge lista pana se intalneste numele dorit, apoi directorul ia
+valoarea pointer-ului gasit.
+
+		PWD:
+	Pentru aceasta functie folosim 3 pointeri:
+-path : output-ul dorit
+-p : contine "/directorul curent"
+-aux: o copie a pointer-ului path
+	Cat timp parintele nu este null, p va lua numele directorului curent , cream o copie dupa path,
+copiem p in path apoi concatenam cu aux si trecem la directorul parinte.
+
+		Tree:
+	Parcurgem recursiv ierarhia, asemanator ca la rmdir, iar pentru fiecare nivel la care ne aflam
+printam un anumit numar de spatii si apoi numele directorului/fisierului.
+
+		Stop:
+	Ne asiguram ca ne aflam in directorul /home, dupa care apelam functia delete_director cu lista de
+directoare a lui home. Stergem lista de fisiere si dezalocam memoria ocupata de home. Iar in final dam free
+pointer-ului cu care citeam comenzile din stdin.
+*/
